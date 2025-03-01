@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mavsis Cosmetics</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #f5f5dc; /* Beige background color */
+            color: #333;
+            padding: 50px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 10px;
+            font-style: italic;
+            color: #777;
+        }
+
+        /* Navigation Styles */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            padding: 20px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Main content area */
+        .main-content {
+            text-align: center;
+            margin: 50px 20px;
+        }
+
+        .video-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 4px solid #e7e7e7;
+        }
+
+        .video-container:hover video {
+            transform: scale(1.03);
+            transition: transform 0.3s ease;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 70px 20px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+        }
+
+        section p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* About Us Section */
+        #about {
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product Styles */
+        .product {
+            display: inline-block;
+            width: 30%;
+            margin: 15px;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product img {
+            width: 100%;
+            height: 300px; /* Set a fixed height */
+            object-fit: cover; /* Ensures the image covers the area and is cropped appropriately */
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product:hover img {
+            transform: scale(1.05);
+        }
+
+        .product h3 {
+            font-size: 22px;
+            color: #333;
+            margin-top: 15px;
+            font-weight: 700;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        #contact p {
+            font-size: 18px;
+        }
+
+        /* CTA Button Styles */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: #fff;
+            color: #ff6f61;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Mavsis Cosmetics</h1>
+        <p>Your Ultimate Beauty Destination</p>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="main-content">
+            <div class="video-container">
+                <h2>Mavsis Cosmetics: Where Beauty Meets Perfection</h2>
+                <video controls>
+                    <source src="https://drive.google.com/file/d/1_mKzuxrq17tIRLIYtEpAI1deDkcrwWb9/view">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Mavsis Cosmetics! We are a premium beauty brand dedicated to creating innovative skincare and makeup products that enhance your natural beauty. Our products are designed for every skin type, crafted with care, and made from the finest ingredients.</p>
+        <p>Location: <strong>Mavsis Cosmetics</strong>, Villa 102, Los Angeles, USA</p>
+        <a href="#contact" class="cta-button">Get in Touch</a>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <h2>Our Products</h2>
+
+        <div class="product">
+            <img src="https://shampoo.tiiny.site/img3.jpeg.image.png" alt="Moisturizer">
+            <h3>Moisturizer</h3>
+            <p>Hydrate and nourish your skin with our rich and refreshing moisturizer, perfect for daily use.</p>
+        </div>
+
+        <div class="product">
+            <img src="https://moistruzier.tiiny.site/img2.jpeg.image.png" alt="Exfoliating Scrub">
+            <h3>Exfoliating Scrub</h3>
+            <p>Gently exfoliate and remove dead skin cells, leaving your skin smooth and glowing.</p>
+        </div>
+
+        <div class="product">
+            <img src="https://refrence.tiiny.site/img1.jpeg.image.png" alt="Serum">
+            <h3>Serum</h3>
+            <p>Target fine lines and dark spots with our powerful, rejuvenating serum for radiant skin.</p>
+        </div>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or inquiries, feel free to reach out to us!</p>
+        <p>Email:<br>
+            <a href="mailto:vaishudhuttarge57@gmail.com">vaishudhuttarge57@gmail.com</a><br>
+            <a href="mailto:aarthikabirajdar@gmail.com">aarthikabirajdar@gmail.com</a><br>
+            <a href="mailto:shabadimansi@gmail.com">shabadimansi@gmail.com</a><br>
+            <a href="mailto:goundiswati@gmail.com">goundiswati@gmail.com</a><br>
+            <a href="mailto:shrutigangonda@gmail.com">shrutigangonda@gmail.com</a>
+        </p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Mavsis Cosmetics. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

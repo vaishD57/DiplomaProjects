@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management System</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2C3E50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .attendance-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #34495E;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        input[type="checkbox"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #BDC3C7;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980B9;
+        }
+
+        .attendance-records {
+            margin-top: 40px;
+        }
+
+        .attendance-records h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #2C3E50;
+        }
+
+        .record-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .record {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .record h3 {
+            color: #3498DB;
+            font-size: 20px;
+        }
+
+        .record p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .no-records {
+            font-size: 18px;
+            text-align: center;
+            color: #e74c3c;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Attendance Management System</h1>
+
+        <!-- Success/Error Messages -->
+        <div id="success-message" class="success-message"></div>
+        <div id="error-message" class="error-message"></div>
+
+        <!-- Attendance Form -->
+        <form class="attendance-form" id="attendance-form" method="POST">
+            <label for="day">Day:</label>
+            <input type="number" name="day" id="day" required placeholder="Enter day (e.g., 15)" />
+
+            <label for="month">Month:</label>
+            <input type="number" name="month" id="month" required placeholder="Enter month (e.g., 11)" />
+
+            <label for="year">Year:</label>
+            <input type="number" name="year" id="year" required placeholder="Enter year (e.g., 2024)" />
+
+            <label for="strength">Class Strength:</label>
+            <input type="number" name="strength" id="strength" required placeholder="Enter total number of students" />
+
+            <!-- Dynamically generated attendance checkboxes -->
+            <div id="attendance-list" class="record-list">
+                <!-- Checkboxes will be added here based on class strength -->
+            </div>
+
+            <input type="submit" value="Mark Attendance" id="submit-button" disabled />
+        </form>
+
+        <script>
+            // Function to enable or disable the submit button
+            function enableSubmitButton() {
+                let strength = document.getElementById('strength').value;
+                let checkboxes = document.querySelectorAll('input[name="attendance[]"]:checked');
+                if (checkboxes.length > 0) {
+                    document.getElementById('submit-button').disabled = false;
+                } else {
+                    document.getElementById('submit-button').disabled = true;
+                }
+            }
+
+            // Dynamically add checkboxes for attendance based on class strength
+            document.getElementById('strength').addEventListener('input', function () {
+                let strength = parseInt(this.value);
+                let attendanceList = document.getElementById('attendance-list');
+                attendanceList.innerHTML = ''; // Clear any previous checkboxes
+                let errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = '';
+
+                // If no valid class strength is entered
+                if (isNaN(strength) || strength <= 0) {
+                    errorMessage.textContent = 'Please enter a valid class strength.';
+                    return;
+                }
+
+                // Create checkboxes based on the class strength
+                for (let i = 1; i <= strength; i++) {
+                    let label = document.createElement('label');
+                    label.textContent = `Roll Number ${i}:`;
+
+                    let input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.name = 'attendance[]';
+                    input.value = i;
+
+                    input.addEventListener('change', enableSubmitButton);
+
+                    attendanceList.appendChild(label);
+                    attendanceList.appendChild(input);
+                    attendanceList.appendChild(document.createElement('br'));
+                }
+
+                // Disable submit button until attendance is marked
+                document.getElementById('submit-button').disabled = true;
+            });
+
+            // Handle form submission
+            document.getElementById('attendance-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Get form values
+                let day = document.getElementById('day').value;
+                let month = document.getElementById('month').value;
+                let year = document.getElementById('year').value;
+                let strength = document.getElementById('strength').value;
+                let attendance = [];
+                let checkboxes = document.querySelectorAll('input[name="attendance[]"]:checked');
+                checkboxes.forEach(function (checkbox) {
+                    attendance.push(checkbox.value);
+                });
+
+                // Save to localStorage
+                let attendanceData = {
+                    day,
+                    month,
+                    year,
+                    strength,
+                    attendance
+                };
+
+                // Get past attendance records from localStorage
+                let pastAttendance = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+                pastAttendance.push(attendanceData);
+
+                // Save the updated attendance records back to localStorage
+                localStorage.setItem('attendanceRecords', JSON.stringify(pastAttendance));
+
+                // Display success message
+                let successMessage = `Attendance marked for ${day}/${month}/${year}.<br>`;
+                successMessage += `Class Strength: ${strength}<br>`;
+                successMessage += `Present Students: ${attendance.length}<br>`;
+
+                document.getElementById('success-message').innerHTML = successMessage;
+
+                // Reset form after submission
+                document.getElementById('attendance-form').reset();
+                document.getElementById('submit-button').disabled = true;
+
+                // Refresh the attendance records
+                displayAttendanceRecords();
+            });
+
+            // Function to display the past attendance records
+            function displayAttendanceRecords() {
+                // Get past attendance records from localStorage
+                let pastAttendance = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+
+                let attendanceRecordsDiv = document.getElementById('attendance-records');
+
+                if (pastAttendance.length === 0) {
+                    attendanceRecordsDiv.innerHTML = '<p class="no-records">No attendance records found.</p>';
+                } else {
+                    // Loop through each record and display it
+                    attendanceRecordsDiv.innerHTML = ''; // Clear any previous records
+
+                    pastAttendance.forEach(function (record) {
+                        let recordDiv = document.createElement('div');
+                        recordDiv.classList.add('record');
+
+                        let recordContent = `
+                            <h3>Attendance for ${record.day}/${record.month}/${record.year}</h3>
+                            <p><strong>Class Strength:</strong> ${record.strength}</p>
+                            <p><strong>Present:</strong> ${record.attendance.length}</p>
+                            <p><strong>Roll Numbers Present:</strong> ${record.attendance.join(', ')}</p>
+                        `;
+
+                        recordDiv.innerHTML = recordContent;
+                        attendanceRecordsDiv.appendChild(recordDiv);
+                    });
+                }
+            }
+
+            // Display past attendance records on page load
+            displayAttendanceRecords();
+        </script>
+
+        <div class="attendance-records">
+            <h2>Past Attendance Records</h2>
+            <div id="attendance-records" class="record-list">
+                <!-- Past attendance records will be shown here -->
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
